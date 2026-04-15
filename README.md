@@ -16,7 +16,7 @@
 | [large-number-calculator](./large-number-calculator/)         | 大数计算器 - 支持大数字的加减乘除计算         |
 | [pdf-to-image](./pdf-to-image/)                               | PDF转图片 - 将PDF转换为图片格式         |
 | [picture-quality-enhancement](./picture-quality-enhancement/) | 图片质量增强 - 调整图片的亮度、对比度、锐化等参数   |
-| [text-to-image](./text-to-image/)                             | 文字转图片 - 将��字内容生成为图片          |
+| [text-to-image](./text-to-image/)                             | 文字转图片 - 将文字内容生成为图片          |
 | [video-to-audio](./video-to-audio/)                           | 视频转音频 - 从视频中提取音频             |
 
 
