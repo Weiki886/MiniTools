@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name="description" content="一个完全在浏览器中运行的音频处理工具，无需安装，无需上传文件，保护您的隐私">
+    <meta name="theme-color" content="#4a6cf7">
+    <title>音频调整器</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-volume-up"></i> 音频调整器</h1>
+        
+        <div class="form-group file-upload-group">
+            <label for="audioFile"><i class="fas fa-file-audio"></i> 选择音频文件：</label>
+            <input type="file" id="audioFile" accept="audio/*">
+        </div>
+        
+        <div class="audio-container hidden" id="audioContainer">
+            <label><i class="fas fa-play-circle"></i> 预览：</label>
+            <audio id="audioPlayer" controls></audio>
+        </div>
+        
+        <div class="controls-section">
+            <div class="section-header">
+                <i class="fas fa-sliders-h"></i> 基本调整
+            </div>
+            
+            <div class="form-group">
+                <label for="volumeControl">
+                    <i class="fas fa-volume-up"></i> 音量调整
+                </label>
+                <div class="slider-container">
+                    <span>0x</span>
+                    <input type="range" id="volumeControl" min="0" max="3" step="0.1" value="1">
+                    <span id="volumeValue" class="volume-value">1.0</span><span>x</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="compressionType"><i class="fas fa-compress-alt"></i> 压缩模式：</label>
+                <select id="compressionType">
+                    <option value="none">无压缩</option>
+                    <option value="light" selected>轻度压缩</option>
+                    <option value="medium">中度压缩</option>
+                    <option value="heavy">重度压缩</option>
+                </select>
+                
+                <label class="checkbox-label">
+                    <input type="checkbox" id="useNoiseGate" checked> 
+                    启用噪声门限（减少背景噪音）
+                </label>
+                
+                <label class="checkbox-label">
+                    <input type="checkbox" id="useSoftClipping" checked> 
+                    使用软截断（减少高音量失真）
+                </label>
+            </div>
+        </div>
+        
+        <div class="controls-section">
+            <div class="section-header">
+                <i class="fas fa-music"></i> 音质优化
+            </div>
+            
+            <div class="form-group eq-controls">
+                <label><i class="fas fa-balance-scale-right"></i> 均衡器 (EQ)：</label>
+                <div class="eq-sliders">
+                    <div class="eq-slider">
+                        <label>低频</label>
+                        <input type="range" id="eqLow" min="-12" max="12" step="1" value="0" class="vertical-slider" orient="vertical">
+                        <span id="eqLowValue">0 dB</span>
+                    </div>
+                    <div class="eq-slider">
+                        <label>中频</label>
+                        <input type="range" id="eqMid" min="-12" max="12" step="1" value="0" class="vertical-slider" orient="vertical">
+                        <span id="eqMidValue">0 dB</span>
+                    </div>
+                    <div class="eq-slider">
+                        <label>高频</label>
+                        <input type="range" id="eqHigh" min="-12" max="12" step="1" value="0" class="vertical-slider" orient="vertical">
+                        <span id="eqHighValue">0 dB</span>
+                    </div>
+                </div>
+                <div class="eq-presets">
+                    <button type="button" id="eqFlat" class="eq-preset-btn">平坦</button>
+                    <button type="button" id="eqBass" class="eq-preset-btn">重低音</button>
+                    <button type="button" id="eqVocal" class="eq-preset-btn">人声增强</button>
+                    <button type="button" id="eqBright" class="eq-preset-btn">明亮</button>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="sampleRateOutput"><i class="fas fa-wave-square"></i> 输出采样率：</label>
+                <select id="sampleRateOutput">
+                    <option value="original" selected>原始采样率</option>
+                    <option value="44100">44.1 kHz (CD质量)</option>
+                    <option value="48000">48 kHz (标准)</option>
+                    <option value="96000">96 kHz (高质量)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="controls-section">
+            <div class="section-header">
+                <i class="fas fa-magic"></i> 音效处理
+            </div>
+            
+            <div class="form-group">
+                <label for="reverbType"><i class="fas fa-broadcast-tower"></i> 混响效果：</label>
+                <select id="reverbType">
+                    <option value="none" selected>无混响</option>
+                    <option value="room">小房间</option>
+                    <option value="hall">音乐厅</option>
+                    <option value="cave">洞穴</option>
+                    <option value="church">教堂</option>
+                </select>
+                <div class="slider-container" id="reverbLevelContainer" style="display: none;">
+                    <span>混响量:</span>
+                    <input type="range" id="reverbLevel" min="0" max="1" step="0.01" value="0.3">
+                    <span id="reverbLevelValue" class="volume-value">0.3</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-headphones"></i> 立体声增强:</label>
+                <div class="slider-container">
+                    <span>窄</span>
+                    <input type="range" id="stereoWidth" min="0" max="1" step="0.01" value="0.5">
+                    <span id="stereoWidthValue" class="volume-value">0.5</span>
+                    <span>宽</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="pitchShift"><i class="fas fa-music"></i> 音调调整:</label>
+                <div class="slider-container">
+                    <span>-12</span>
+                    <input type="range" id="pitchShift" min="-12" max="12" step="1" value="0">
+                    <span id="pitchShiftValue" class="volume-value">0</span>
+                    <span>+12</span>
+                </div>
+                <div class="small-text">半音: 负值降低音调，正值提高音调</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="filterType"><i class="fas fa-filter"></i> 滤波器:</label>
+                <select id="filterType">
+                    <option value="none" selected>无滤波</option>
+                    <option value="lowpass">低通 (保留低频)</option>
+                    <option value="highpass">高通 (保留高频)</option>
+                    <option value="bandpass">带通 (保留中频)</option>
+                </select>
+                <div class="slider-container" id="filterFreqContainer" style="display: none;">
+                    <span>截止频率:</span>
+                    <input type="range" id="filterFreq" min="20" max="20000" step="10" value="1000">
+                    <span id="filterFreqValue" class="volume-value">1000 Hz</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group action-buttons">
+            <button id="processBtn" disabled><i class="fas fa-cogs"></i> 处理音频</button>
+            <div id="downloadOptions" class="hidden">
+                <div class="download-container">
+                    <div class="format-selection">
+                        <label for="audioFormatSelect"><i class="fas fa-file-export"></i> 格式：</label>
+                        <select id="audioFormatSelect">
+                            <option value="wav">WAV</option>
+                            <option value="mp3" selected>MP3</option>
+                            <option value="ogg">OGG</option>
+                        </select>
+                    </div>
+                    <button id="downloadBtn" disabled><i class="fas fa-download"></i> 下载调整后的音频</button>
+                </div>
+                <div class="filename-container">
+                    <label for="customFileName"><i class="fas fa-file-signature"></i> 自定义文件名 (可选):</label>
+                    <input type="text" id="customFileName" placeholder="留空使用默认名称">
+                </div>
+            </div>
+        </div>
+        
+        <div id="status" class="status hidden"></div>
+    </div>
+
+    <footer class="footer">
+        <div style="width: 100%; margin: 0 auto;">
+            © Weiki 音频调整器 | 完全在浏览器中运行，您的数据不会上传至任何服务器
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

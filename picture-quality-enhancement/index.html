@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字图像调整处理器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>数字图像调整处理器</h1>
+        
+        <div class="upload-container">
+            <div class="upload-area" id="uploadArea">
+                <p>点击或拖拽图片到此处</p>
+                <input type="file" id="imageInput" accept="image/*" hidden>
+            </div>
+        </div>
+        
+        <div class="main-content" id="mainContent" style="display: none;">
+            <div class="enhancement-panel">
+                <div class="enhancement-options">
+                    <h3>调整选项</h3>
+                    <div class="option">
+                        <label>亮度:</label>
+                        <input type="range" id="brightness" min="-100" max="100" value="0">
+                        <span id="brightnessValue">0</span>
+                    </div>
+                    <div class="option">
+                        <label>对比度:</label>
+                        <input type="range" id="contrast" min="-100" max="100" value="0">
+                        <span id="contrastValue">0</span>
+                    </div>
+                    <div class="option">
+                        <label>锐化:</label>
+                        <input type="range" id="sharpen" min="0" max="100" value="0">
+                        <span id="sharpenValue">0</span>
+                    </div>
+                    <div class="option">
+                        <label>饱和度:</label>
+                        <input type="range" id="saturation" min="-100" max="100" value="0">
+                        <span id="saturationValue">0</span>
+                    </div>
+                    <div class="option">
+                        <label>色温:</label>
+                        <input type="range" id="colorTemp" min="-100" max="100" value="0">
+                        <span id="colorTempValue">0</span>
+                    </div>
+                    <div class="option">
+                        <label>曝光度:</label>
+                        <input type="range" id="exposure" min="-100" max="100" value="0">
+                        <span id="exposureValue">0</span>
+                    </div>
+                    <div class="option">
+                        <label>伽马校正:</label>
+                        <input type="range" id="gamma" min="10" max="300" value="100">
+                        <span id="gammaValue">1.00</span>
+                    </div>
+                    <div class="option">
+                        <label>噪点减少:</label>
+                        <input type="range" id="noise" min="0" max="100" value="0">
+                        <span id="noiseValue">0</span>
+                    </div>
+                    <div class="option">
+                        <label>色调:</label>
+                        <input type="range" id="hue" min="-180" max="180" value="0">
+                        <span id="hueValue">0</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button id="applyEnhance">应用调整</button>
+                        <button id="resetEnhance">重置</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="preview-panel">
+                <div class="preview-container">
+                    <div class="preview">
+                        <h3>原图</h3>
+                        <div class="image-preview">
+                            <img id="originalPreview" src="" alt="原图预览">
+                        </div>
+                    </div>
+                    <div class="preview">
+                        <h3>调整后</h3>
+                        <div class="image-preview">
+                            <img id="enhancedPreview" src="" alt="调整后预览">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="download-options">
+                    <h3>下载选项</h3>
+                    <div class="option">
+                        <label for="fileName">文件名称:</label>
+                        <input type="text" id="fileName" placeholder="保持原文件名">
+                    </div>
+                    <div class="option">
+                        <label for="fileFormat">文件格式:</label>
+                        <select id="fileFormat">
+                            <option value="png">PNG</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="webp">WebP</option>
+                        </select>
+                    </div>
+                    <button id="downloadBtn">下载调整后的图片</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div style="width: 100%; margin: 0 auto;">
+            © Weiki 图片质量增强 | 完全在浏览器中运行，您的数据不会上传至任何服务器
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

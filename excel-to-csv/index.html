@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel转CSV工具</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Excel转CSV工具</h1>
+            <p>快速将您的Excel文件(.xlsx)转换为CSV格式</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="drop-zone" id="dropZone">
+                    <div class="drop-content">
+                        <div class="upload-icon">+</div>
+                        <h3>拖拽Excel文件到这里</h3>
+                        <p>或者</p>
+                        <input type="file" id="fileInput" accept=".xlsx,.xls" multiple>
+                        <label for="fileInput" class="file-button">选择文件</label>
+                        <p class="file-info">支持 .xlsx 和 .xls 格式，可选择多个文件</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="files-section" id="filesSection" style="display: none;">
+                <h3>选中的文件</h3>
+                <div class="file-list" id="fileList"></div>
+                <div class="action-buttons">
+                    <button id="convertBtn" class="convert-btn">预览数据</button>
+                    <button id="clearBtn" class="clear-btn">清空文件</button>
+                </div>
+            </div>
+
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <h3>数据预览</h3>
+                <p>请检查所有文件的数据是否正确读取，然后点击转换：</p>
+                <div class="preview-content" id="previewContent"></div>
+                <div class="action-buttons">
+                    <button id="confirmConvertBtn" class="convert-btn">确认转换</button>
+                    <button id="cancelPreviewBtn" class="clear-btn">重新选择</button>
+                </div>
+            </div>
+
+            <div class="progress-section" id="progressSection" style="display: none;">
+                <h3>转换进度</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">准备中...</div>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h3>转换完成</h3>
+                <div class="download-list" id="downloadList"></div>
+                <button id="downloadAllBtn" class="download-all-btn">下载所有文件</button>
+            </div>
+
+            <div class="error-section" id="errorSection" style="display: none;">
+                <div class="error-message" id="errorMessage"></div>
+                <button id="retryBtn" class="retry-btn">重试</button>
+            </div>
+        </main>
+
+        <footer class="footer">
+        <div style="width: 100%; margin: 0 auto;">
+            © Weiki Excel转CSV工具 | 完全在浏览器中运行，您的数据不会上传至任何服务器
+        </div>
+    </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

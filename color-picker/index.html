@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片取色器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>图片取色器</h1>
+            <p>上传图片，点击任意位置获取颜色代码</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="upload-section">
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                    选择图片文件
+                </button>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+            
+            <div class="canvas-container">
+                <div class="canvas-wrapper">
+                    <canvas id="imageCanvas" class="hidden"></canvas>
+                </div>
+                
+                <div class="color-info hidden" id="colorInfo">
+                    <h3>颜色信息</h3>
+                    <div class="color-preview" id="colorPreview">
+                        点击图片获取颜色
+                    </div>
+                    <div class="color-values">
+                        <div class="color-value">
+                            <span class="color-label">HEX:</span>
+                            <input type="text" class="color-code" id="hexValue" readonly onclick="copyToClipboard(this)">
+                            <button class="copy-btn" onclick="copyToClipboard(document.getElementById('hexValue'))">复制</button>
+                        </div>
+                        <div class="color-value">
+                            <span class="color-label">RGB:</span>
+                            <input type="text" class="color-code" id="rgbValue" readonly onclick="copyToClipboard(this)">
+                            <button class="copy-btn" onclick="copyToClipboard(document.getElementById('rgbValue'))">复制</button>
+                        </div>
+                        <div class="color-value">
+                            <span class="color-label">HSL:</span>
+                            <input type="text" class="color-code" id="hslValue" readonly onclick="copyToClipboard(this)">
+                            <button class="copy-btn" onclick="copyToClipboard(document.getElementById('hslValue'))">复制</button>
+                        </div>
+                    </div>
+                    <div class="coordinates" id="coordinates">坐标: (0, 0)</div>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h4>使用说明：</h4>
+                <ul>
+                    <li>点击"选择图片文件"按钮上传图片</li>
+                    <li>支持 JPG、PNG、GIF 等常见图片格式</li>
+                    <li>图片上传后，点击图片上的任意位置</li>
+                    <li>右侧会显示该位置的颜色信息，包括 HEX、RGB、HSL 格式</li>
+                    <li>点击颜色代码或复制按钮可以复制到剪贴板</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div style="width: 100%; margin: 0 auto;">
+            © Weiki 图片取色器 | 完全在浏览器中运行，您的数据不会上传至任何服务器
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

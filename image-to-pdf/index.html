@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片转PDF工具</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1>图片转PDF工具</h1>
+            <div class="form-group">
+                <label for="fileInput">选择图片:</label>
+                <input type="file" id="fileInput" accept="image/*" multiple>
+            </div>
+
+            <div class="form-group">
+                <label for="pdfName">PDF文件名:</label>
+                <input type="text" id="pdfName" placeholder="输入PDF文件名" value="converted_document">
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="highQuality" checked>
+                <label for="highQuality">优化图片清晰度（生成更高质量但更大的PDF）</label>
+            </div>
+
+            <div style="text-align: center; margin: 15px 0;">
+                <button id="convertBtn" class="button" disabled>
+                    <span id="spinner" class="spinner"></span>
+                    转换并下载PDF
+                </button>
+            </div>
+
+            <div class="preview-container">
+                <div id="imagesPreview"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div style="width: 100%; margin: 0 auto;">
+            © Weiki 图片转PDF工具 | 完全在浏览器中运行，您的数据不会上传至任何服务器
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

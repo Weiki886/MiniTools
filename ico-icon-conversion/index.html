@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG转ICO图标转换器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PNG转ICO转换器</h1>
+            <p>快速将PNG图片转换为ICO图标文件</p>
+        </div>
+
+        <div class="main-content">
+            <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                <div class="upload-icon">📁</div>
+                <div class="upload-text">点击选择PNG图片或拖拽文件到这里</div>
+                <div class="upload-hint">支持PNG格式，建议尺寸256x256像素以上</div>
+            </div>
+
+            <input type="file" id="fileInput" accept=".png" />
+
+            <div class="preview-area" id="previewArea">
+                <div class="preview-title">图片预览</div>
+                <img class="preview-image" id="previewImage" alt="预览图片" />
+            </div>
+
+            <div class="size-options">
+                <h3>选择ICO尺寸</h3>
+                <div class="size-radio">
+                    <input type="radio" id="size16" name="iconSize" value="16">
+                    <label for="size16">16x16 (小图标)</label>
+                </div>
+                <div class="size-radio">
+                    <input type="radio" id="size32" name="iconSize" value="32" checked>
+                    <label for="size32">32x32 (标准图标)</label>
+                </div>
+                <div class="size-radio">
+                    <input type="radio" id="size48" name="iconSize" value="48">
+                    <label for="size48">48x48 (大图标)</label>
+                </div>
+                <div class="size-radio">
+                    <input type="radio" id="size64" name="iconSize" value="64">
+                    <label for="size64">64x64 (特大图标)</label>
+                </div>
+                <div class="size-radio">
+                    <input type="radio" id="size128" name="iconSize" value="128">
+                    <label for="size128">128x128 (超大图标)</label>
+                </div>
+                <div class="size-radio">
+                    <input type="radio" id="size256" name="iconSize" value="256">
+                    <label for="size256">256x256 (高清图标)</label>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn" id="convertBtn" onclick="convertToIco()" disabled>转换为ICO</button>
+                <button class="btn" id="downloadBtn" onclick="downloadIco()" disabled style="display: none;">下载ICO文件</button>
+            </div>
+
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <div class="result-area" id="resultArea">
+                <h3>转换完成</h3>
+                <p id="resultText">ICO文件已生成，点击下载按钮保存文件。</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            © Weiki PNG转ICO转换器 | 完全在浏览器中运行，您的数据不会上传至任何服务器
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
